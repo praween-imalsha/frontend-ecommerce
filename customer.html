@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-store</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <style>
+        body {
+            background-color: #f1f3f6;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #0044cc; /* New color */
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 30px;
+            color: #fff !important;
+            transition: all 0.3s ease-in-out;
+        }
+        .navbar-brand:hover {
+            color: #ffcc00 !important;
+            transform: scale(1.1);
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        body {
+            background-color: #f1f3f6;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        .navbar {
+            background-color: #0044cc; /* New color */
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 30px;
+            color: #fff !important;
+            transition: all 0.3s ease-in-out;
+        }
+        .navbar-brand:hover {
+            color: #ffcc00 !important;
+            transform: scale(1.1);
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00;
+            transform: scale(1.1);
+        }
+        #search-bar {
+            max-width: 300px;
+        }
+        #category-dropdown {
+            max-width: 200px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00;
+            transform: scale(1.1);
+        }
+        /* Hero Section with Image Slider */
+        .carousel-inner {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .carousel-caption {
+            bottom: 20%;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-caption h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .carousel-caption p {
+            font-size: 1.3rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        header.hero {
+            background: linear-gradient(135deg, #00bcd4, #3f51b5); /* Gradient background */
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        header.hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        header.hero p {
+            font-size: 1.3rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        .card {
+            width: 100%; /* Ensure the card fills the available space */
+            max-width: 280px; /* Limit the width to make the cards smaller */
+            margin: 0 auto; /* Center the card */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .card-img-top {
+            height: 180px; /* Set a fixed height for the image */
+            object-fit: cover; /* Ensure the image covers the area without distortion */
+            transition: transform 0.3s ease;
+        }
+
+     .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+
+        .card-body {
+            padding: 10px; /* Reduce padding inside the card body */
+            background-color: #fff;
+        }
+
+
+        .card-title {
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 600;
+        }
+
+
+        .card-text {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+
+        .add-to-cart {
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            width: 100%;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+
+
+
+        #review-form textarea {
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .star-rating .star {
+            color: #ccc;
+            font-size: 30px;
+            transition: color 0.3s;
+        }
+        .star-rating .star:hover {
+            color: #ffcc00;
+        }
+        .star-rating .star.selected {
+            color: #ffcc00;
+        }
+
+
+        .review-card {
+            background: #ffffff;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+        }
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .review-card .card-body {
+            padding: 20px;
+        }
+        .review-card .card-title {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .review-card .card-text {
+            color: #555;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #212529;
+            color: white;
+            padding: 30px 0;
+        }
+        .footer-logo h4 {
+            font-size: 22px;
+            color: #ffc107;
+        }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #ffc107;
+        }
+        .social-icons a {
+            background-color: #3b3b3b;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .social-icons a:hover {
+            background-color: #007bff;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="customer.html">E-store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="productCatalog.html">🛍️ Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="orderhistroy.html">📜 Order History</a></li>
+                <li class="nav-item"><a class="nav-link" href="shopingcart.html">🛒 Cart <span id="cart-count" class="badge bg-danger">0</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="#review-section">⭐ Reviews</a></li>
+            </ul>
+
+            <!-- Search Bar -->
+            <form class="d-flex me-2" id="search-form">
+                <input id="search-bar" class="form-control me-2" type="search" placeholder="🔍 Search products..." aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+
+            <!-- Category Dropdown -->
+            <select id="category-dropdown" class="form-select me-2">
+                <option value="">All Categories</option>
+                <option value="Fiction"> Fiction</option>
+                <option value="Non-Fiction"> Non-Fiction</option>
+                <option value="Science">🔬 Science</option>
+                <option value="Technology">💻 Technology</option>
+            </select>
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" id="profile-btn" role="button">🙎‍♂️</a>
+                    <ul class="dropdown-menu dropdown-menu-end" id="profile-menu">
+                        <li><a class="dropdown-item" href="profile.html">🔑 Change Password</a></li>
+                        <li><a class="dropdown-item text-danger" href="#" id="logout-option">🚪 Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="download.jpeg" class="d-block w-100" alt="Welcome">
+            <div class="carousel-caption">
+                <h1>Welcome to E-store</h1>
+                <p>Your one-stop shop for amazing products!</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="download.jpeg" class="d-block w-100" alt="Electronics">
+            <div class="carousel-caption">
+                <h1>Discover Electronics</h1>
+                <p>Latest gadgets and devices at your fingertips.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="download%20(3).jpeg" class="d-block w-100" alt="Fashion">
+            <div class="carousel-caption">
+                <h1>Exclusive Fashion</h1>
+                <p>Trendy outfits to elevate your style game.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+
+
+
+<section class="container my-4 main-content" id="featured-products">
+    <h2 class="text-center mb-4">📌 Featured Products</h2>
+    <div class="row" id="products-list">
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="container my-5" id="review-section">
+    <h2 class="text-center">⭐ Your Review</h2>
+    <form id="review-form">
+        <div class="mb-3">
+            <label for="product-select" class="form-label">Select Product</label>
+            <select id="product-select" class="form-select">
+                <option value="">📦 Select a Product</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="reviewText" class="form-label">Write Your Review</label>
+            <textarea class="form-control" id="reviewText" rows="4" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="star-rating" class="form-label">Rating</label>
+            <div class="star-rating" id="star-rating">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+    </form>
+
+    <h3 class="mt-5">Customer Reviews</h3>
+    <div class="review-list" id="reviews-list">
+        <div class="review-card">
+            <div class="card-body">
+                <h5 class="card-title">John Doe</h5>
+                <p class="card-text">Great product! Highly recommend it. 🌟🌟🌟🌟🌟</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 footer-logo">
+                <h4>E-store</h4>
+                <p>Best shopping experience online!</p>
+            </div>
+            <div class="col-md-4 footer-links">
+                <a href="#">About Us</a> | <a href="contact.html">Contact</a> | <a href="#">FAQ</a>
+            </div>
+            <div class="col-md-4 social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+
+<script>
+
+    document.querySelectorAll('.star-rating .star').forEach(star => {
+        star.addEventListener('click', function () {
+            document.querySelectorAll('.star-rating .star').forEach(star => star.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+</script>
+<script src="js/jquery-3.7.1.min.js"></script>
+<script src="js/customer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login | E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+<div class="login-container">
+    <h3 class="mb-4">🔑 Welcome Back</h3>
+    <form id="login-form">
+        <div class="mb-3">
+            <input type="email" class="form-control" id="login-email" placeholder="📧 Enter email" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" id="login-password" placeholder="🔒 Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+    <p class="mt-3">
+        <a href="passwordForget.html" class="text-white fw-bold">Forgot Password?</a>
+    </p>
+    <p class="mt-2">
+        Don't have an account? <a href="register.html" class="text-white fw-bold">Register</a>
+    </p>
+</div>
+<script src="js/jquery-3.7.1.min.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

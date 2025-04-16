@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+.checkout-container {
+    max-width: 600px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-ui {
+    background: linear-gradient(145deg, #00d9ff, #00d9ff);
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.card-ui .card-details {
+    flex: 1;
+}
+
+.card-ui .card-number {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-ui .card-name {
+    margin-top: 10px;
+}
+
+.card-inputs input {
+    margin-bottom: 15px;
+}

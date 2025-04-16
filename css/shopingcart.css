@@ -1,0 +1,45 @@
+/* Body styling */
+body {
+    background-color: #f4f4f4;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #0044cc;
+    transition: background-color 0.3s ease;
+}
+.navbar-brand {
+    font-family: 'Great Vibes', cursive;
+    font-size: 30px;
+    color: #0095ff !important;
+    transition: all 0.3s ease-in-out;
+}
+.navbar-brand:hover {
+    color: #ffcc00 !important;
+    transform: scale(1.1);
+}
+.navbar-nav .nav-link {
+    color: #0095ff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+    color: #ffcc00;
+    transform: scale(1.1);
+}
+
+/* Shopping Cart Table */
+.container {
+    background: #0022ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+th, td {
+    text-align: center;
+}
+.btn {
+    margin: 5px;
+}
