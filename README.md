@@ -1,16 +1,102 @@
 
+
+
 🛒 E-Commerce Web Application - Spring Boot
-This is a full-featured e-commerce web application built using Spring Boot, MySQL, HTML, CSS, JavaScript, jQuery, and JWT-based security. The application supports customer and admin roles, allowing users to browse and purchase products, while administrators can manage the system.
+This is a full-featured e-commerce web application built with Spring Boot, MySQL, HTML, CSS, JavaScript, jQuery, and secured with JWT-based authentication. It supports role-based access for customers and administrators, offering a seamless online shopping and admin management experience.
+
+🔧 Technologies Used
+Backend:
+
+Spring Boot (Java)
+
+Spring Security with JWT (Authentication & Authorization)
+
+RESTful APIs
+
+Maven
+
+Database:
+
+MySQL
+
+Spring Data JPA (Hibernate ORM)
+
+Frontend:
+
+HTML5, CSS3, Bootstrap 5
+
+JavaScript ( jQuery)
+
+AJAX & JSON for asynchronous operations
+
+SweetAlert for modern alert dialogs
+
+FontAwesome for icons
+
+Other:
+
+Role-based Navigation (Customer & Admin)
+
+CORS Configuration
+
+Postman (API testing)
+
+Git & GitHub for version control
 
 🔹 Features Overview
 🛍️ Product Ordering
-Customers can browse a wide range of products, view detailed product information, and place orders securely. Each order is saved with relevant details like products, quantity, total amount, and order status.
 
-💳 Payment Integration
-The application supports simulated payment processing. Users can proceed to checkout and complete their purchase via a mock payment system, ensuring a smooth and secure transaction flow.
+
+
+
+Place orders with selected items and quantity
+
+Store order information with product details, user, status, and timestamps
+
+
+
+
+Secure checkout process
+
+Order confirmation post-payment
 
 🛒 Shopping Cart
-Users can add products to their cart, update quantities, or remove items before placing an order. The cart dynamically updates totals based on user interactions and ensures seamless product selection.
+Add products to cart
+
+Update quantity or remove items
+
+Cart total updates dynamically with real-time pricing
+
+AJAX-based smooth UX
+
+👤 User Management
+JWT-based login and registration
+
+Role-based redirection:
+
+index.html for Customers
+
+admindashboard.html for Admins
+
+Profile view and order history for customers
+
+📦 Admin Dashboard
+Manage Products (Add, Edit, Delete)
+
+Manage Categories
+
+View & Update Orders (change status: Pending, Shipped, Delivered)
+
+Manage Users (activate/deactivate accounts)
 
 🌟 Product Reviews
-Registered users can submit reviews for purchased products. Reviews include ratings and comments, helping other customers make informed decisions and improving the platform's trustworthiness.
+
+Star ratings and comment support
+
+
+
+
+Responsive UI for all devices
+
+📊 Dashboard Analytics (optional future feature)
+Order stats, user activity logs, product performance tracking
