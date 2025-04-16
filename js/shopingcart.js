@@ -2,134 +2,96 @@ document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("id");
 
-    if (!token) {
-        return Swal.fire({
-            title: "Session Expired!",
-            text: "Please log in again.",
-            icon: "warning",
-            confirmButtonColor: "#d33",
-            confirmButtonText: "OK"
-        }).then(() => {
-            window.location.href = "index.html";
-        });
-    }
+    const cartItemsContainer = document.getElementById("cart-items");
+    const totalPriceElement = document.getElementById("total-price");
 
-    const cartItemsContainer = document.querySelector("#cart-items");
-    const totalPriceElement = document.querySelector("#total-price");
-
-    const formatter = new Intl.NumberFormat('en-LK', {
+    const currencyFormatter = new Intl.NumberFormat('en-LK', {
         style: 'currency',
         currency: 'LKR'
     });
 
-    function loadCartItems() {
+    function showError(message) {
+        Swal.fire({
+            title: "Error",
+            text: message,
+            icon: "error",
+            confirmButtonColor: "#d33"
+        });
+    }
+
+    function loadCart() {
         fetch(`http://localhost:8080/api/v1/cart/${userId}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => response.json())
-            .then(cartData => {
+            .then(data => {
                 cartItemsContainer.innerHTML = "";
                 let total = 0;
 
-                if (!Array.isArray(cartData) || cartData.length === 0) {
-                    cartItemsContainer.innerHTML = "<tr><td colspan='5' class='text-center'>🛒 Your cart is empty.</td></tr>";
-                    totalPriceElement.textContent = formatter.format(0);
-                    return;
-                }
-
-                cartData.forEach(item => {
-                    if (!item.product) {
-                        console.warn("Cart item missing product info:", item);
-                        return;
-                    }
-
-                    const subtotal = item.product.price * item.quantity;
+                data.forEach(item => {
+                    const product = item.product;
+                    const title = product?.title || "No Title";
+                    const price = product?.price || 0;
+                    const quantity = item.quantity;
+                    const subtotal = price * quantity;
                     total += subtotal;
 
                     cartItemsContainer.innerHTML += `
                         <tr>
+                            <td>${title}</td>
+                            <td>${currencyFormatter.format(price)}</td>
                             <td>
-                                <img src="${item.product.image}" alt="${item.product.title}" style="width: 50px;">
-                                ${item.product.title}
+                                <input type="number" min="1" value="${quantity}" class="form-control quantity-input" data-id="${item.id}">
                             </td>
-                            <td>${formatter.format(item.product.price)}</td>
+                            <td>${currencyFormatter.format(subtotal)}</td>
                             <td>
-                                <input type="number" value="${item.quantity}" min="1" data-id="${item.id}" class="item-quantity form-control">
+                                <button class="btn btn-danger btn-sm remove-btn" data-id="${item.id}">Remove</button>
                             </td>
-                            <td>${formatter.format(subtotal)}</td>
-                            <td>
-                                <button class="btn btn-danger btn-sm btn-remove" data-id="${item.id}">🗑 Remove</button>
-                            </td>
-                        </tr>
-                    `;
+                        </tr>`;
                 });
 
-                totalPriceElement.textContent = formatter.format(total);
+                totalPriceElement.textContent = currencyFormatter.format(total);
             })
             .catch(error => {
-                showError("Failed to load cart items.");
                 console.error(error);
+                showError("Failed to load cart.");
             });
     }
 
-    cartItemsContainer.addEventListener("change", (event) => {
-        if (event.target.classList.contains("item-quantity")) {
-            const cartItemId = event.target.dataset.id;
-            const newQuantity = parseInt(event.target.value);
+    cartItemsContainer.addEventListener("change", (e) => {
+        if (e.target.classList.contains("quantity-input")) {
+            const id = e.target.dataset.id;
+            const quantity = e.target.value;
 
-            if (newQuantity < 1) {
-                Swal.fire("Invalid Quantity", "Quantity must be at least 1.", "warning");
-                loadCartItems();
+            if (quantity <= 0) {
+                showError("Quantity must be at least 1.");
                 return;
             }
 
-            fetch(`http://localhost:8080/api/v1/cart/${cartItemId}/update`, {
+            fetch(`http://localhost:8080/api/v1/cart/${id}/update?quantity=${quantity}`, {
                 method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({ quantity: newQuantity })
+                headers: { Authorization: `Bearer ${token}` }
             })
-                .then(() => {
-                    Swal.fire("Updated", "Quantity updated successfully.", "success");
-                    loadCartItems();
-                })
+                .then(() => loadCart())
                 .catch(error => {
-                    showError("Failed to update quantity.");
                     console.error(error);
+                    showError("Failed to update quantity.");
                 });
         }
     });
 
-    cartItemsContainer.addEventListener("click", (event) => {
-        if (event.target.classList.contains("btn-remove")) {
-            const cartItemId = event.target.dataset.id;
-
-            Swal.fire({
-                title: "Remove Item?",
-                text: "This item will be removed from your cart.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Yes, remove it"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch(`http://localhost:8080/api/v1/cart/${cartItemId}/remove`, {
-                        method: "DELETE",
-                        headers: { Authorization: `Bearer ${token}` }
-                    })
-                        .then(() => {
-                            Swal.fire("Removed", "Item removed from cart.", "success");
-                            loadCartItems();
-                        })
-                        .catch(error => {
-                            showError("Failed to remove item.");
-                            console.error(error);
-                        });
-                }
-            });
+    cartItemsContainer.addEventListener("click", (e) => {
+        if (e.target.classList.contains("remove-btn")) {
+            const id = e.target.dataset.id;
+            fetch(`http://localhost:8080/api/v1/cart/${id}/remove`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` }
+            })
+                .then(() => loadCart())
+                .catch(error => {
+                    console.error(error);
+                    showError("Failed to remove item.");
+                });
         }
     });
 
@@ -150,28 +112,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                     .then(() => {
                         Swal.fire("Cleared", "Cart has been emptied.", "success");
-                        loadCartItems();
+                        loadCart();
                     })
                     .catch(error => {
-                        showError("Failed to clear cart.");
                         console.error(error);
+                        showError("Failed to clear cart.");
                     });
             }
         });
     };
 
     window.checkout = () => {
-        const totalPrice = parseFloat(totalPriceElement.textContent.replace(/[^\d.-]/g, ""));
-        if (totalPrice > 0) {
+        const totalText = totalPriceElement.textContent.replace(/[^\d.-]/g, "");
+        const total = parseFloat(totalText);
+        if (total > 0) {
             window.location.href = "checkout.html";
         } else {
-            Swal.fire("Cart is Empty", "Please add items before checkout.", "info");
+            Swal.fire({
+                title: "Cart is Empty!",
+                text: "Add items to your cart before checking out.",
+                icon: "info",
+                confirmButtonColor: "#3085d6"
+            });
         }
     };
 
-    function showError(message) {
-        Swal.fire("Error", message, "error");
-    }
-
-    loadCartItems();
+    loadCart();
 });
