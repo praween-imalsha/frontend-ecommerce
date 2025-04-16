@@ -1,35 +1,49 @@
 body {
-    background: linear-gradient(to right, #f4f4f4, #2a5298);
+    background: linear-gradient(135deg, #667eea, #764ba2);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     font-family: 'Poppins', sans-serif;
+    overflow: hidden;
 }
 
 .login-container {
-    max-width: 400px;
-    padding: 30px;
+    max-width: 420px;
+    padding: 35px;
     background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(15px);
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    color: white;
+    backdrop-filter: blur(18px);
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    color: #ffffff;
     text-align: center;
+    animation: pop-in 0.6s ease-out;
+}
+
+@keyframes pop-in {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 h3 {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .form-control {
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 10px;
     transition: all 0.3s ease;
 }
 
@@ -41,32 +55,34 @@ h3 {
     background: rgba(255, 255, 255, 0.4);
     color: black;
     border-color: white;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
 }
 
-.btn-primary {
-    background: #ff6f61;
+.btn-glow {
+    background: #ff7e5f;
     border: none;
-    padding: 12px;
-    font-size: 16px;
+    padding: 14px;
+    font-size: 17px;
     font-weight: 600;
-    border-radius: 8px;
-    transition: 0.3s ease-in-out;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 0 rgba(255, 126, 95, 0.5);
 }
 
-.btn-primary:hover {
-    background: #e65c50;
-    box-shadow: 0 4px 10px rgba(255, 110, 97, 0.4);
+.btn-glow:hover {
+    background: #feb47b;
+    box-shadow: 0 0 15px rgba(255, 126, 95, 0.7);
+    transform: scale(1.03);
 }
 
 a {
-    color: #ffde59;
+    color: #ffe66d;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: color 0.3s ease-in-out;
 }
 
 a:hover {
-    color: #ffcc00;
+    color: #fff176;
     text-decoration: underline;
 }
