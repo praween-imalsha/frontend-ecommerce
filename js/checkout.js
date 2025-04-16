@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
             icon: "warning",
             confirmButtonText: "OK"
         }).then(() => {
-            window.location.href = "login.html";
+            window.location.href = "index.html";
         });
     }
 
