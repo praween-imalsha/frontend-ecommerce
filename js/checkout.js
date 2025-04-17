@@ -9,14 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
             icon: "warning",
             confirmButtonText: "OK"
         }).then(() => {
-            window.location.href = "login.html";
+            window.location.href = "index.html";
         });
+        return;
     }
-
 
     fetchTotalPrice(userId, token);
     fetchCartItems(userId, token);
-
 
     function fetchTotalPrice(userId, token) {
         $.ajax({
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Authorization": "Bearer " + token
             },
             success: (data) => {
-                const totalPrice = data.totalPrice || "0.00"; // Use totalPrice returned from backend
+                const totalPrice = data.totalPrice || "0.00";
                 document.getElementById("total-price").innerText = totalPrice;
             },
             error: (error) => {
@@ -35,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
-
 
     function fetchCartItems(userId, token) {
         $.ajax({
@@ -58,32 +56,28 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
     document.getElementById("cardNumber").addEventListener("input", function () {
-        let cardNumber = this.value.replace(/\s+/g, '').replace(/(\d{4})(?=\d)/g, '$1 '); // Format card number
+        let cardNumber = this.value.replace(/\s+/g, '').replace(/(\d{4})(?=\d)/g, '$1 ');
         document.getElementById("card-number").innerText = cardNumber || "**** **** **** ****";
     });
 
-
     document.getElementById("expiryDate").addEventListener("input", function () {
-        let expiryDate = this.value.replace(/[^\d]/g, '').slice(0, 4); // Remove non-numeric characters
+        let expiryDate = this.value.replace(/[^\d]/g, '').slice(0, 4);
         if (expiryDate.length > 2) {
             expiryDate = expiryDate.slice(0, 2) + '/' + expiryDate.slice(2, 4);
         }
-        this.value = expiryDate; // Set the input value with slash
+        this.value = expiryDate;
         document.getElementById("expiry-date").innerText = expiryDate || "MM/YY";
     });
 
     document.getElementById("cvv").addEventListener("input", function () {
-        let cvv = this.value.replace(/\D/g, '').slice(0, 3); // Limit CVV to 3 digits
+        this.value = this.value.replace(/\D/g, '').slice(0, 3);
     });
-
 
     document.getElementById("fullName").addEventListener("input", function () {
         const name = this.value.trim();
         document.getElementById("card-name").innerText = name || "John Doe";
     });
-
 
     document.getElementById("checkout-form").addEventListener("submit", function (event) {
         event.preventDefault();
@@ -115,9 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 cvv
             },
             items: cartItems.map(item => ({
-                bookId: item.book.id,
+                productId: item.product.id,
                 quantity: item.quantity,
-                totalPrice: item.quantity * item.book.price
+                totalPrice: item.quantity * item.product.price
             })),
             totalPrice
         };
@@ -139,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }).then(() => {
                     localStorage.removeItem("cart");
                     localStorage.removeItem("cartTotal");
-                    window.location.href = "orderhistroy.html";
+                    window.location.href = "orderhistory.html";
                 });
             },
             error: (error) => {
