@@ -98,7 +98,7 @@ Star ratings and comment support
 Responsive UI for all devices
 
 📊 Dashboard Analytics (optional future feature)
-Order stats, user activity logs, product performance tracking
+Order stats, user activity logs, product 
 
 Bcakend https://github.com/praween-imalsha/E-commerce-Backend.git
 
