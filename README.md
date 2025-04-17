@@ -104,6 +104,6 @@ Bcakend https://github.com/praween-imalsha/E-commerce-Backend.git
 
  youtubelink https://youtu.be/a7BvuG2x6Ns
 
-![Alt Text](E:\frontend-ecommerce\screenshot\Screenshot 2025-04-16 203041.png)
-![Alt Text](E:\frontend-ecommerce\screenshot\Screenshot 2025-04-16 203102.png)
+<img alt="Alt Text" height="100" src="E:\frontend-ecommerce\screenshot\Screenshot 2025-04-16 203041.png" width="100"/>
+<img alt="Alt Text" height="100" src="E:\frontend-ecommerce\screenshot\Screenshot 2025-04-16 203102.png" width="100"/>
 
