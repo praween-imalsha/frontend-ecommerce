@@ -103,3 +103,7 @@ Order stats, user activity logs, product
 Bcakend https://github.com/praween-imalsha/E-commerce-Backend.git
 
  youtubelink https://youtu.be/a7BvuG2x6Ns
+
+![Alt Text](E:\frontend-ecommerce\screenshot\Screenshot 2025-04-16 203041.png)
+![Alt Text](E:\frontend-ecommerce\screenshot\Screenshot 2025-04-16 203102.png)
+
